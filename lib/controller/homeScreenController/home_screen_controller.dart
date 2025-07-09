@@ -1,29 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sample_project/model/sampleRepoModel/sample_repo_model.dart';
-import 'package:sample_project/repository/sampleRepository/sample_repo.dart';
-import 'package:sample_project/repository/sampleRepository/sample_repo_interface.dart';
+import 'package:sample_project/service/sampleRepoInterface/sample_repo_interface.dart';
 
 class HomeScreenController extends ChangeNotifier {
-  final SampleRepoInterface _sampleRepo = SampleRepo();
-  List<SampleRepoModel> _getList = [];
-
-  List<SampleRepoModel> get getList => _getList;
-
+  SampleRepoInterface _sampleRepoInterface;
+  HomeScreenController(this._sampleRepoInterface);
+  List<SampleRepoModel> _apiData = [];
+  List<SampleRepoModel> get apiData =>_apiData;
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
 
-  void fetchApiData() async {
+  Future<void> getAllApiData() async {
     _isLoading = true;
-    try {
-      _getList = await _sampleRepo.fetchSampleApi();
-    } catch (e) {
-      print(e.toString());
-      _getList = [];
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
+    notifyListeners();
+    await Future.delayed(Duration(seconds: 2));
+    _apiData = await _sampleRepoInterface.fetchSampleApi();
+    _isLoading = false;
     notifyListeners();
   }
 }
