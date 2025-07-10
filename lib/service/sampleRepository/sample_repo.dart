@@ -13,10 +13,10 @@ class SampleRepo implements SampleRepoInterface {
       if (response.statusCode == 200) {
         return loadFromJson(response.body);
       } else {
-        // return [];
         throw Exception("Failed to load data");
       }
     } catch (e) {
+      print("//////");
       print(e.toString());
       return [];
     }

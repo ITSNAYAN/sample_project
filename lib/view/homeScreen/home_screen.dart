@@ -32,10 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FavouriteScreen()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FavouriteScreen()));
             },
             icon: Icon(Icons.favorite),
           ),
@@ -51,20 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     return await value.getAllApiData();
                   },
                   child: ListView.builder(
-                    // key: ValueKey(value.apiData[index].userId)
                     itemCount: value.apiData.length,
                     itemBuilder: (context, index) {
                       final item = value.apiData[index];
                       return CustomListTile(
+                        key: ValueKey(item.userId),
                         title1: item.title,
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailScreen(getDetails: item),
-                            ),
-                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(getDetails: item)));
                         },
                         widget: FavouriteIcon(id: item.id),
                       );
