@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 )
-              : Center(child: Text("no data found "));
+              : Center(child: Text("no data found"));
         },
       ),
     );
